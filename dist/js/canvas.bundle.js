@@ -104,6 +104,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
 canvas.width = innerWidth;
@@ -122,10 +123,7 @@ addEventListener('resize', function () {
   canvas.width = innerWidth;
   canvas.height = innerHeight;
   init();
-});
-
-function getDistance(x1, y1, x2, y2) {} // Objects
-
+}); // Objects
 
 var Circle = /*#__PURE__*/function () {
   function Circle(x, y, radius, color) {
@@ -171,12 +169,19 @@ function init() {
 
 function animate() {
   requestAnimationFrame(animate);
-  c.clearRect(0, 0, canvas.width, canvas.height); //c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y)
-
+  c.clearRect(0, 0, canvas.width, canvas.height);
   circle1.update();
   circle2.x = mouse.x;
   circle2.y = mouse.y;
   circle2.update();
+
+  if (Object(_utils__WEBPACK_IMPORTED_MODULE_0__["distance"])(circle1.x, circle1.y, circle2.x, circle2.y) < circle1.radius + circle2.radius) {
+    circle1.color = 'red';
+  } else {
+    circle1.color = 'black';
+  }
+
+  console.log(Object(_utils__WEBPACK_IMPORTED_MODULE_0__["distance"])(circle1.x, circle1.y, circle2.x, circle2.y));
 }
 
 init();

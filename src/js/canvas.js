@@ -1,4 +1,5 @@
 import utils from './utils'
+import { distance } from './utils'
 
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
@@ -25,10 +26,6 @@ addEventListener('resize', () => {
 
   init()
 })
-
-function getDistance(x1, y1, x2, y2){
-  
-}
 
 // Objects
 class Circle {
@@ -69,11 +66,19 @@ function animate() {
   requestAnimationFrame(animate)
   c.clearRect(0, 0, canvas.width, canvas.height)
 
-  //c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y)
   circle1.update()
   circle2.x = mouse.x;
   circle2.y = mouse.y;
   circle2.update()
+
+  if(distance(circle1.x, circle1.y, circle2.x, circle2.y) < circle1.radius + circle2.radius){
+    circle1.color = 'red'
+  }
+  else {
+    circle1.color = 'black'
+  }
+
+  console.log(distance(circle1.x, circle1.y, circle2.x, circle2.y));
 }
 
 init()
